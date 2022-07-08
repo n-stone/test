@@ -7,9 +7,9 @@ jobs:
   Trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Start Downstream Job
-        run: |
-          curl -X POST https://api.github.com/repos/n-stone/test/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u ${{ secrets.ACCESS_TOKEN }} \
-          --data '{"event_type": "Builder", "client_payload": { "Parameter1": "Value1", "Parameter2": "Value2", "Parameter3": "Value3" }}'
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          event-type: Builder
+          client-payload: '{ "Parameter1": "Value1", "Parameter2": "Value2", "Parameter3": "Value3" }'
