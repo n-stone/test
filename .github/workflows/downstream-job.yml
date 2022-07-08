@@ -1,9 +1,9 @@
-name: Downstream Job
+name: Builder
 
 on: [repository_dispatch]
 
 jobs:
-  Downstream-actions:
+  Builder:
     runs-on: ubuntu-latest
     steps:
       - name: Event Information
