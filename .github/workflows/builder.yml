@@ -5,7 +5,29 @@ on: [repository_dispatch]
 jobs:
   Builder:
     runs-on: ubuntu-latest
+    if: github.event.action == 'Builder'
     steps:
-      - name: Event Information
+      - name: Parameter Information
+        env:
+          PARAM1: ${{ github.event.client_payload.parameter1 }}
+          PARAM2: ${{ github.event.client_payload.parameter1 }}
+          PARAM3: ${{ github.event.client_payload.parameter1 }}
         run: |
-          echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
+          echo "Parameter 1: $PARAM1"
+          echo "Parameter 2: $PARAM2"
+          echo "Parameter 3: $PARAM3"
+
+  Tester:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'Builder'
+    needs: Builder
+    steps:
+      - name: Parameter Information
+        env:
+          PARAM1: ${{ github.event.client_payload.parameter1 }}
+          PARAM2: ${{ github.event.client_payload.parameter1 }}
+          PARAM3: ${{ github.event.client_payload.parameter1 }}
+        run: |
+          echo "Parameter 1: $PARAM1"
+          echo "Parameter 2: $PARAM2"
+          echo "Parameter 3: $PARAM3"
