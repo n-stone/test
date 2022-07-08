@@ -10,8 +10,8 @@ jobs:
       - name: Parameter Information
         env:
           PARAM1: ${{ github.event.client_payload.parameter1 }}
-          PARAM2: ${{ github.event.client_payload.parameter1 }}
-          PARAM3: ${{ github.event.client_payload.parameter1 }}
+          PARAM2: ${{ github.event.client_payload.parameter2 }}
+          PARAM3: ${{ github.event.client_payload.parameter3 }}
         run: |
           echo "Parameter 1: $PARAM1"
           echo "Parameter 2: $PARAM2"
@@ -19,14 +19,14 @@ jobs:
 
   Tester:
     runs-on: ubuntu-latest
-    if: github.event.action == 'Builder'
+    #if: github.event.action == 'Builder'
     needs: Builder
     steps:
       - name: Parameter Information
         env:
           PARAM1: ${{ github.event.client_payload.parameter1 }}
-          PARAM2: ${{ github.event.client_payload.parameter1 }}
-          PARAM3: ${{ github.event.client_payload.parameter1 }}
+          PARAM2: ${{ github.event.client_payload.parameter2 }}
+          PARAM3: ${{ github.event.client_payload.parameter3 }}
         run: |
           echo "Parameter 1: $PARAM1"
           echo "Parameter 2: $PARAM2"
