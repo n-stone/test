@@ -1,6 +1,8 @@
 name: Builder
 
-on: [repository_dispatch]
+on:
+  repository_dispatch:
+    types: [Builder]
 
 env:
   PARAM1: ${{ github.event.client_payload.parameter1 }}
@@ -10,7 +12,6 @@ env:
 jobs:
   Builder:
     runs-on: ubuntu-latest
-    if: github.event.action == 'Builder'
     steps:
       - name: Parameter Information
         run: |
@@ -20,7 +21,6 @@ jobs:
 
   Tester:
     runs-on: ubuntu-latest
-    #if: github.event.action == 'Builder'
     needs: Builder
     steps:
       - name: Parameter Information
