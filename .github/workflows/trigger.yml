@@ -7,9 +7,13 @@ jobs:
   Trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v2
+      - name: Deploy Your Service
+        uses: adityakar/workflow-dispatcher@v1.0
         with:
+          owner: n-stone
+          repo: test
           token: ${{ secrets.ACCESS_TOKEN }}
-          event-type: Builder
-          client-payload: '{ "Parameter1": "Value1", "Parameter2": "Value2", "Parameter3": "Value3" }'
+          event_type: Builder
+          client_payload: '{ "Parameter1": "Value1", "Parameter2": "Value2", "Parameter3": "Value3" }'
+          wait_time: 5
+          max_time: 180
