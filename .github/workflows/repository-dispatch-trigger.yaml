@@ -1,4 +1,4 @@
-name: Trigger
+name: Repository Dispatch Trigger
 
 on:
   workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
         token: ${{ secrets.ACCESS_TOKEN }}
         inputs: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
     - name: Deploy Your Service
-      uses: adityakar/workflow-dispatcher
+      uses: adityakar/workflow-dispatcher@v1.0
       with:
         owner: n-stone
         repo: test
