@@ -7,27 +7,28 @@ jobs:
   Trigger:
     runs-on: ubuntu-latest
     steps:
-    - name: Invoke workflow in another repo with inputs
+    - name: benc-uk/workflow-dispatch
       uses: benc-uk/workflow-dispatch@v1
       with:
         workflow: Builder
         repo: n-stone/test
         token: ${{ secrets.ACCESS_TOKEN }}
         inputs: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'  
-    - name: Repository Dispatch
+    - name: peter-evans/repository-dispatch
       uses: peter-evans/repository-dispatch@v2
       with:
         token: ${{ secrets.ACCESS_TOKEN }}
         event-type: Builder
         client-payload: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
-    - name: Invoke workflow with inputs
+    - name: aurelien-baudet/workflow-dispatch
       uses: aurelien-baudet/workflow-dispatch@v2
       with:
         workflow: Builder
         token: ${{ secrets.ACCESS_TOKEN }}
         inputs: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
-    - name: Deploy Your Service
-      uses: adityakar/workflow-dispatcher@v1.0
+    - uses: actions/checkout@v3
+    - name: workflow-dispatcher
+      uses: ./.github/actions/workflow-dispatcher
       with:
         owner: n-stone
         repo: test
