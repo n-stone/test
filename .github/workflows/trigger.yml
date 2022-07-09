@@ -8,12 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Your Service
-        uses: adityakar/workflow-dispatcher@v1.0
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
         with:
           owner: n-stone
           repo: test
-          token: ${{ secrets.ACCESS_TOKEN }}
-          event_type: Builder
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          workflow_file_name: builder.yml
+          wait_interval: 10
           client_payload: '{ "Parameter1": "Value1", "Parameter2": "Value2", "Parameter3": "Value3" }'
-          wait_time: 5
-          max_time: 180
+          propagate_failure: true
+          trigger_workflow: true
+          wait_workflow: true
