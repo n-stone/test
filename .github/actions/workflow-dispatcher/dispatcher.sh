@@ -7,7 +7,7 @@ function trigger_workflow {
     -H "Accept: application/vnd.github.v3+json" \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer ${INPUT_TOKEN}" \
-    -d "{\"event_type\": \"${INPUT_EVENT_TYPE}\", \"input\": ${INPUT_CLIENT_PAYLOAD} }")
+    -d "{\"event_type\": \"${INPUT_EVENT_TYPE}\", \"client_payload\": ${INPUT_CLIENT_PAYLOAD} }")
   # If the response from the GitHub API is null, i.e., HTTP 204, then the request was successful. Wait for 2 seconds and proceed.
   if [ -z "$resp" ]
   then
