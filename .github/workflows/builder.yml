@@ -2,11 +2,22 @@ name: Builder
 
 on:
   workflow_dispatch:
+    inputs:
+      parameter1:
+        description: 'parameter1'     
+        required: true
+      parameter2:
+        description: 'parameter2'     
+        required: true      
+      parameter3:
+        description: 'parameter3'     
+        required: true      
+
 
 env:
-  PARAM1: ${{ github.event.client_payload.parameter1 }}
-  PARAM2: ${{ github.event.client_payload.parameter2 }}
-  PARAM3: ${{ github.event.client_payload.parameter3 }}
+  PARAM1: ${{ github.event.inputs.parameter1 }}
+  PARAM2: ${{ github.event.inputs.parameter2 }}
+  PARAM3: ${{ github.event.inputs.parameter3 }}
 
 jobs:
   Builder:
