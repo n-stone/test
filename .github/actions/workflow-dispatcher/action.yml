@@ -45,6 +45,6 @@ runs:
         INPUT_EVENT_TYPE: ${{ inputs.event_type }}
         INPUT_REPO: ${{ inputs.repo }}
         INPUT_TOKEN: ${{ inputs.token }}
-        INPUT_CLIENT_PAYLOAD: ${{ inputs.client_payload }}
+        INPUT_CLIENT_PAYLOAD: ${{ inputs.input }}
         INPUT_WAIT_TIME: ${{ inputs.wait_time }}
         INPUT_MAX_TIME: ${{ inputs.max_time }}
