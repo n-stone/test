@@ -1,0 +1,38 @@
+name: Trigger
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Trigger:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Invoke workflow in another repo with inputs
+      uses: benc-uk/workflow-dispatch@v1
+      with:
+        workflow: Builder
+        repo: n-stone/test
+        token: ${{ secrets.ACCESS_TOKEN }}
+        inputs: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'  
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        token: ${{ secrets.ACCESS_TOKEN }}
+        event-type: Builder
+        client-payload: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
+    - name: Invoke workflow with inputs
+      uses: aurelien-baudet/workflow-dispatch@v2
+      with:
+        workflow: Builder
+        token: ${{ secrets.ACCESS_TOKEN }}
+        inputs: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
+    - name: Deploy Your Service
+      uses: adityakar/workflow-dispatcher
+      with:
+        owner: n-stone
+        repo: test
+        token: ${{ secrets.ACCESS_TOKEN }}
+        event_type: builder
+        client_payload: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
+        wait_time: 5
+        max_time: 180
