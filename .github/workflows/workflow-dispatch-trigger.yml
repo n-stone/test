@@ -1,4 +1,4 @@
-name: Trigger
+name: workflow_dispatch Trigger
 
 on:
   workflow_dispatch:
