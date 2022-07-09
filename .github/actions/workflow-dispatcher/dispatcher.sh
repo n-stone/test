@@ -2,8 +2,8 @@
 # Triggers a GitHub Action Workflow using the dispatches API, then waits for the Workflow to complete. All values are read from environment variables.
 
 function trigger_workflow {
-  echo "Triggering ${INPUT_EVENT_TYPE} in ${INPUT_OWNER}/${INPUT_REPO}"
-  resp=$(curl -X POST -s "https://api.github.com/repos/${INPUT_OWNER}/${INPUT_REPO}/dispatches" \
+  echo "Triggering ${INPUT_EVENT_TYPE} in ${INPUT_REPO}"
+  resp=$(curl -X POST -s "https://api.github.com/repos/${INPUT_REPO}/dispatches" \
     -H "Accept: application/vnd.github.v3+json" \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer ${INPUT_TOKEN}" \
@@ -26,7 +26,7 @@ function find_workflow {
   do
     counter=$(( counter + 1 ))
     # The GitHub API returns an ordered list of triggered workflows by time, newest first. Get the first object from the list.
-    workflow=$(curl -s "https://api.github.com/repos/${INPUT_OWNER}/${INPUT_REPO}/actions/runs?event=repository_dispatch" \
+    workflow=$(curl -s "https://api.github.com/repos//actions/runs?event=repository_dispatch" \
       -H "Accept: application/vnd.github.v3+json" \
       -H "Authorization: Bearer ${INPUT_TOKEN}" | jq '.workflow_runs[0]')
     # Get the created_at value from the first workflow in the list.
@@ -78,7 +78,7 @@ function wait_on_workflow {
     fi
     sleep "$INPUT_WAIT_TIME"
     # Query the API again and keep checking the value of conclusion.
-    conclusion=$(curl -s "https://api.github.com/repos/${INPUT_OWNER}/${INPUT_REPO}/actions/runs/${workflow_id}" \
+    conclusion=$(curl -s "https://api.github.com/repos/${INPUT_REPO}/actions/runs/${workflow_id}" \
     	-H "Accept: application/vnd.github.v3+json" \
     	-H "Authorization: Bearer ${INPUT_TOKEN}" | jq '.conclusion')
     counter=$(( counter + INPUT_WAIT_TIME ))

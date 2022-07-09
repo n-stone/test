@@ -1,23 +1,21 @@
 name: 'Workflow Dispatcher'
 description: 'Trigger a GitHub Action Workflow in a separate repo, show the link and wait for it to finish.'
-author: 'Aditya Kar'
+author: 'Nils Stein'
 branding:
   icon: 'fast-forward'
   color: 'blue'
 inputs:
-  owner:
-    description: 'Owner of the GitHub repo'
-    required: true
-  repo:
-    description: 'Name of the GitHub repo'
-    required: true
   token:
     description: 'Access token (PAT) for the repo'
     required: true
   event_type:
     description: 'The event type of the repository dispatch'
     required: true
-  client_payload:
+  repo:
+    description: 'The owner and repository name. For example, Codertocat/Hello-World'
+    required: false
+    default: ${{ github.repository }}
+  input:
     description: 'Payload for the repository dispatch event'
     default: "{}"
     required: false
@@ -45,7 +43,6 @@ runs:
       shell: bash
       env:
         INPUT_EVENT_TYPE: ${{ inputs.event_type }}
-        INPUT_OWNER: ${{ inputs.owner }}
         INPUT_REPO: ${{ inputs.repo }}
         INPUT_TOKEN: ${{ inputs.token }}
         INPUT_CLIENT_PAYLOAD: ${{ inputs.client_payload }}

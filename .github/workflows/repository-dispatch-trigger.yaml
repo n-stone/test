@@ -11,10 +11,8 @@ jobs:
     - name: workflow-dispatcher
       uses: ./.github/actions/workflow-dispatcher
       with:
-        owner: n-stone
-        repo: test
         token: ${{ secrets.ACCESS_TOKEN }}
         event_type: Builder
-        client_payload: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
+        input: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
         wait_time: 5
         max_time: 180
