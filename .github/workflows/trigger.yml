@@ -15,7 +15,7 @@ jobs:
           github_token: ${{ secrets.ACCESS_TOKEN }}
           workflow_file_name: builder.yml
           wait_interval: 10
-          client_payload: '{ "Parameter1": "Value1", "Parameter2": "Value2", "Parameter3": "Value3" }'
+          client_payload: '{ "parameter1": "value1", "parameter2": "value2", "parameter3": "value3" }'
           propagate_failure: true
           trigger_workflow: true
           wait_workflow: true
