@@ -26,7 +26,7 @@ function find_workflow {
   do
     counter=$(( counter + 1 ))
     # The GitHub API returns an ordered list of triggered workflows by time, newest first. Get the first object from the list.
-    workflow=$(curl -s "https://api.github.com/repos/${INPUT_REPO}/actions/runs?event=repository_dispatch" \
+    workflow=$(curl -s "https://api.github.com/repos/${INPUT_REPO}/actions/workflows/${INPUT_WORKFLOW_FILE_NAME}/runs?event=repository_dispatch" \
       -H "Accept: application/vnd.github.v3+json" \
       -H "Authorization: Bearer ${INPUT_TOKEN}" | jq '.workflow_runs[0]')
     # Get the created_at value from the first workflow in the list.
@@ -44,7 +44,7 @@ function find_workflow {
         echo "Workflow not found"
         exit 1
       else
-        sleep 2
+        sleep 0.5
       fi
     else
       break
