@@ -13,7 +13,7 @@ jobs:
       with:
         token: ${{ secrets.ACCESS_TOKEN }}
         event_type: Builder
-        workflow_file_name: builder
+        workflow_file_name: builder.yml
         input: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
         wait_time: 5
         max_time: 180
