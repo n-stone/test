@@ -1,6 +1,9 @@
 name: Builder
 
 on:
+  repository_dispatch:
+    types: [Builder]
+
   workflow_dispatch:
     inputs:
       parameter1:
@@ -12,7 +15,6 @@ on:
       parameter3:
         description: 'parameter3'     
         required: true      
-
 
 env:
   PARAM1: ${{ github.event.inputs.parameter1 }}
