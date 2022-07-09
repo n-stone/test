@@ -25,6 +25,7 @@ jobs:
       with:
         workflow: Builder
         token: ${{ secrets.ACCESS_TOKEN }}
+        wait-for-completion-interval: 5s
         inputs: '{ "parameter1": "Value1", "parameter2": "Value2", "parameter3": "Value3" }'
     - uses: actions/checkout@v3
     - name: workflow-dispatcher
