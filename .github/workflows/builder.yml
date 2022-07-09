@@ -17,9 +17,9 @@ on:
         required: true
 
 env:
-  PARAM1: ${{ github.event.inputs.parameter1 }} || ${{ github.event.client_payload.parameter1 }}
-  PARAM2: ${{ github.event.inputs.parameter2 }} || ${{ github.event.client_payload.parameter2 }}
-  PARAM3: ${{ github.event.inputs.parameter3 }} || ${{ github.event.client_payload.parameter3 }}
+  PARAM1: ${{ github.event.inputs.parameter1 || github.event.client_payload.parameter1 }}
+  PARAM2: ${{ github.event.inputs.parameter2 || github.event.client_payload.parameter2 }}
+  PARAM3: ${{ github.event.inputs.parameter3 || github.event.client_payload.parameter3 }}
 
 jobs:
   Builder:
